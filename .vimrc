@@ -13,3 +13,12 @@ set autowrite
 " Credit goes to http://vim.wikia.com/wiki/Remove_unwanted_spaces#Automatically_removing_all_trailing_whitespace
 autocmd BufWritePre *.* :%s/\s\+$//e
 
+" These lines give you a block cursor in Cygwin terminal.
+" Thanks http://superuser.com/questions/634326/how-can-i-get-a-block-cursor-in-vim-in-the-cygwin-terminal
+" This is at least better than nothing, since I can not find a way to highlight
+" the cursor and/or cursor line on Cygwin.
+let &t_ti.="\e[1 q"
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[1 q"
+let &t_te.="\e[0 q"
+
