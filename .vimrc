@@ -13,12 +13,18 @@ set autowrite
 " Credit goes to http://vim.wikia.com/wiki/Remove_unwanted_spaces#Automatically_removing_all_trailing_whitespace
 autocmd BufWritePre *.* :%s/\s\+$//e
 
-" These lines give you a block cursor in Cygwin terminal.
-" Thanks http://superuser.com/questions/634326/how-can-i-get-a-block-cursor-in-vim-in-the-cygwin-terminal
-" This is at least better than nothing, since I can not find a way to highlight
-" the cursor and/or cursor line on Cygwin.
-let &t_ti.="\e[1 q"
-let &t_SI.="\e[5 q"
-let &t_EI.="\e[1 q"
-let &t_te.="\e[0 q"
+"" These lines give you a block cursor in Cygwin terminal.
+"" Thanks http://superuser.com/questions/634326/how-can-i-get-a-block-cursor-in-vim-in-the-cygwin-terminal
+"" This is at least better than nothing, since I can not find a way to highlight
+"" the cursor and/or cursor line on Cygwin.
+"" UPDATE: These lines cause the vim 7.x.x on Lubuntu 16.04.1 messing up lines
+""         when editing. So I abandon this approach.
+"let &t_ti.="\e[1 q"
+"let &t_SI.="\e[5 q"
+"let &t_EI.="\e[1 q"
+"let &t_te.="\e[0 q"
+
+" This seems the standard way to enable the cursor-line indicator (as underline)
+" and it works for stock Lubuntu, Cygwin on Windows, Termux on Android.
+set cursorline
 
