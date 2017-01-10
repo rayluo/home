@@ -28,3 +28,12 @@ autocmd BufWritePre *.* :%s/\s\+$//e
 " and it works for stock Lubuntu, Cygwin on Windows, Termux on Android.
 set cursorline
 
+" When a long line is wrapped, the "gk" and "gj" allow you to move up and down
+" a visual line, while normal "k" and "j" move a physical line.
+" The following settings map "gk" and "gj" to cursor <up> and <down>.
+map <up> gk
+map <down> gj
+" And the following lines enables same <up> and <down> behavior in INSERT mode
+imap <up> <C-[> <up>i
+imap <down> <C-[> <down>i
+
