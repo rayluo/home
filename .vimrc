@@ -39,3 +39,7 @@ imap <down> <C-[> <down>i
 
 " Enables mouse support so that we can switch vim window by simply clicking on them
 set mouse=a
+
+" Setup a shorthand for Python unitTest current file
+" Currently only support the test file inside one level below project root
+:command PT :!python -m unittest %:h.%:t:r
