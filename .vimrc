@@ -37,3 +37,5 @@ map <down> gj
 imap <up> <C-[> <up>i
 imap <down> <C-[> <down>i
 
+" Enables mouse support so that we can switch vim window by simply clicking on them
+set mouse=a
