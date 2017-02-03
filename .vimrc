@@ -42,4 +42,4 @@ set mouse=a
 
 " Setup a shorthand for Python unitTest current file
 " Currently only support the test file inside one level below project root
-:command PT :!python -m unittest %:h.%:t:r
+:command PT :!python -m unittest -v %:h.%:t:r
