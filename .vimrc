@@ -10,6 +10,9 @@ set colorcolumn=80
 
 " In a codebase that uses 4 space characters for each indent, here are good settings to start with:
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+" And then set different indent for html and javascript files
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 
 " This is needed in GUI Bash of Git on Windows, but not needed for Termux on Android
 set autowrite
