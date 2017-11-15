@@ -1,4 +1,8 @@
-:command E Explore
+" After changing any content of this file, you can reload them into CURRENT buffer,
+" by using ":source ~/.vimrc" command.
+" Note: to do so, all your commands and functions need a trailing "!" to avoid E174.
+
+:command! E Explore
 
 set number
 
@@ -42,4 +46,5 @@ set mouse=a
 
 " Setup a shorthand for Python unitTest current file
 " Currently only support the test file inside one level below project root
-:command PT :!python -m unittest -v %:h.%:t:r
+:command! PT :!python -m unittest -v %:h.%:t:r
+
