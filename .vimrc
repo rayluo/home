@@ -8,6 +8,9 @@ set number
 
 set colorcolumn=80
 
+" Some Linux distro (such as antix 17) does not turn on syntax highlighting by default, so it is here.
+syntax on
+
 " In a codebase that uses 4 space characters for each indent, here are good settings to start with:
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 " And then set different indent for html and javascript files
