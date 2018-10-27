@@ -5,4 +5,4 @@
 .viminfo
 *.swp
 git-prompt.sh
-
+.git-credentials
