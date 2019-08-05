@@ -2,10 +2,8 @@ download_and_source () {
     local filename=$1
     local url=$2
     if [ ! -f $filename ]; then
-        # The default wget in Termux does not support https, so I use Python 3 instead
-        local pyscript="from urllib.request import urlopen; open('$filename', 'wb').write(urlopen('$url').read())"
-        echo "python -c \"$pyscript\""
-        python -c "$pyscript"
+        # The default wget in Termux does not support https, so I use Python instead
+        python ~/download.py $url > $filename
     fi
     source $filename
 }
