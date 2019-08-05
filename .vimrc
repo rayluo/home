@@ -50,6 +50,33 @@ imap <down> <C-[> <down>i
 " Enables mouse support so that we can switch vim window by simply clicking on them
 set mouse=a
 
+" Set SPACE as leader kep, to replace the default "\"
+:let mapleader = " "
+
+" Show leader key and its timeout (at lower right corner)
+" Copied from https://stackoverflow.com/a/8160809
+set showcmd
+
+" Go to tab by number
+" Inspired by https://superuser.com/a/675119
+" but changed <leader>9 to partially mimic browser convention
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 :tablast<cr>
+
+noremap <leader><Left> :tabprevious<CR>
+noremap <leader><Right> :tabnext<CR>
+
+" Ctrl+Left Ctrl+Right are very convenient, though not matching any standard
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>
+
 " Setup a shorthand for Python unitTest current file
 " Currently only support the test file inside one level below project root
 :command! PT :!python -m unittest -v %:h.%:t:r
