@@ -81,3 +81,5 @@ nnoremap <C-Right> :tabnext<CR>
 " Currently only support the test file inside one level below project root
 :command! PT :!python -m unittest -v %:h.%:t:r
 
+" Spell check. Can't believe I live without it for 2 years
+set spell
