@@ -6,5 +6,5 @@ import sys
 
 if len(sys.argv) < 2:
     sys.exit("Usage: %s url" % sys.argv[0])
-print(urlopen(sys.argv[1]).read())
+print(urlopen(sys.argv[1]).read().decode('utf-8'))
 
