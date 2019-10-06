@@ -3,7 +3,7 @@ download_and_source () {
     local url=$2
     if [ ! -f $filename ]; then
         # The default wget in Termux does not support https, so I use Python instead
-        python ~/download.py $url > $filename
+        python ~/download.py $url $filename
     fi
     source $filename
 }
