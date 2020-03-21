@@ -17,3 +17,6 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 # you might want to manually hardcode it in your own environment
 PS1='\[$GREEN\]\t\[$RED\]-\[$BLUE\]\u@\h\[$YELLOW\]\W$(__git_ps1 " (%s)")\[$WHITE\]\$ '
 
+# A workaround for the ROXTerm on my AntiX 19, otherwise lazygit loses highlight color
+alias tmux='TERM=xterm-256color tmux'
+
