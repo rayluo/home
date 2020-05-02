@@ -1,0 +1,6 @@
+*.txt diff=do-word-diff
+*.md diff=do-word-diff
+*.markdown diff=do-word-diff
+*.rst diff=do-word-diff
+*.rest diff=do-word-diff
+
