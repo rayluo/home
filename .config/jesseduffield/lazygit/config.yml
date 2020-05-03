@@ -1,0 +1,4 @@
+git:
+  merging:
+    # extra args passed to `git merge`, e.g. --no-ff
+    args: "--no-ff"
