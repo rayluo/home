@@ -83,3 +83,5 @@ nnoremap <C-Right> :tabnext<CR>
 
 " Spell check. Can't believe I live without it for 2 years
 set spell
+
+set noswapfile  " No more swp clean-up, but also losing same-file-open UPFRONT warning
