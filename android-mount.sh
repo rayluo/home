@@ -1,0 +1,110 @@
+#!/bin/bash
+
+# -----------------------------------------------------------------------------
+# antiX gui for mounting/unmount android devices, by PPC, 19/5/2020, fully GPL... https://pastebin.com/akVRHLuz
+# -----------------------------------------------------------------------------
+# Originally from https://www.antixforum.com/forums/topic/gui-to-mount-and-unmount-android-devices/
+# This version is copied from https://pastebin.com/Q2b6aZJr
+#
+
+output_a="$HOME/.jmtpfs-output.txt"
+output_b="$HOME/.jmtpfs-output3.txt"
+dir="$HOME/android_device"
+
+sleep_time=1
+
+preparation(){
+  # Clear some files and prepare directories:
+  echo "Clearing files and preparing directories"
+  if [ -f "${output_a}" ]; then
+    :> "${output_a}"
+  fi
+  if [ -f "${output_b}" ]; then
+    :> "${output_b}"
+  fi
+  if ! [ -d "${dir}" ]; then
+    mkdir -p "$dir"
+  fi
+} # preparation
+
+check_utilities(){
+  # Check that some commands are available
+  echo "Check availability of required utilities: started"
+  fusermount -V 1>/dev/null || exit 1
+  xdg-open --version 1>/dev/null || exit 1
+## testing -  yad
+if ! [ -x "$(command -v yad)" ]; then
+  echo 'Error: command is not available' >&2 && exit
+   else
+  echo 'command available'
+fi
+
+## testing -  jmtpfs
+
+if ! [ -x "$(command -v jmtpfs)" ]; then
+  echo 'Error: command is not available' >&2 && exit
+    else
+  echo 'command available'
+fi
+
+  echo "Check availability of required utilities: finished successfully"
+} # check_utilities
+
+check_mounted(){
+  # 1- check if a android device seems to be mounted. If so, offer to unmount it and exit
+  [ "$(ls -A "$dir")" ] && echo "Android device seems to be mounted" && yad --center --title "Unmount Android Device" --text=$" Android device seems to be mounted. \n Click Unmount to be able to unplug it safely, \n close this window to remount the device and keep accessing it from your computer."  --button Unmount && fusermount -u "$dir" && rm -r "$dir" && exit
+} # check_mounted
+
+check_connected(){
+  # 2- Check if an android device is connected to the computer, if not, warn user and exit
+
+ while :
+do
+device_check=$(jmtpfs  2>&1)
+if [[ $device_check == *"No mtp"* ]]; then
+   echo 'nothing connected'
+else echo 'something connected' && sleep 1 && break
+fi
+yad --center  --title "Mount Android Device" --text=$" No MTP enabled  Android device found! \n  \n Connect a single device using it's USB cable and \n make sure to select it's 'MTP' or 'File share' option and retry." --button=$"EXIT":1 --button=$"Retry":2
+#"bash -c help"
+foo=$?
+[[ $foo -eq 1 ]] && echo 'user pressed Exit' && exit 1
+[[ $foo -eq 2 ]] && echo 'user pressed Retry'
+done
+} # check_connected
+
+mount_display(){
+  # 3- Try to mount android device and show contents
+  jmtpfs "$dir" &&
+  xdg-open "$dir" |& tee -a "${output_b}"
+  echo "just tried to mount device and display it's contents"
+} # mount_display
+
+check_while_mount(){
+  # 4- When trying to mount device, perform check if device contents are displayed, if not, user may need to allow access on the device. Prompt user to do that and unmount, remount device, and try to display it's contents again
+  sleep "${sleep_time}" && echo " Checking if device can be mounted, asking for user to grant permition on the device and retry to mount"
+  run_check1="$(grep -c "does not exist" "${output_b}")"
+  if [ "$run_check1" -eq "1" ]; then
+    echo "Please check if you have ALLOW access to your files, in your android device,\n in order to procced!" && yad --center --title "Mount Android Device" --text=$"  Please check if you have ALLOW access to your files, in your android device,\n in order to proceed! \n Note: if you accidentally did not allow access, unplug then replug your devide USB cable " --button Retry && fusermount -u "$dir" && jmtpfs "$dir" && xdg-open "$dir"
+  fi
+  #recheck if device contents are displayed, if not, warn user and exit and unmount device to avoid errors
+  sleep 1 && echo " last check if device can be mounted. If not, unmount it to avoid any errors"
+[ "$(ls -A "$dir")" ] && echo "The device seems to be correctly mounted." && exit
+ echo "Please check if you have ALLOW access to your files, in your android device,\n in order to procced!" && yad --window-icon="phone" --center --title "Mount Android Device" --text=$"  Unable to mount device! \n Please check it you correctly allowed selected, in you device the MTP... or File transfer... options.\n Or Allowed file access \n Unplug and replug your device and retry..." --button Exit
+     fusermount -u "$dir" && rm -r "$dir"
+} # check_while_mount
+
+main(){
+  # The main function
+  preparation
+  check_utilities
+
+  check_mounted
+  check_connected
+  mount_display
+  check_while_mount
+  echo "Done"
+} # main
+
+main
+
