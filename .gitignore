@@ -6,3 +6,10 @@
 *.swp
 git-prompt.sh
 .git-credentials
+
+.config/
+
+.elinks/
+
+# I tend to put my Python virtual environments at ~/env27, ~/env_project_foo
+env*/
