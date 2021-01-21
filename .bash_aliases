@@ -35,3 +35,5 @@ PS1="$nc\u$nc@$CYAN\H$nc:\w$nc$YELLOW\$(__git_ps1 \" (%s)\")$nc\$ "
 # A workaround for the ROXTerm on my AntiX 19, otherwise lazygit loses highlight color
 alias tmux='TERM=xterm-256color tmux'
 
+# This line allows triggering system browser on Termux Android
+BROWSER=termux-open-url
