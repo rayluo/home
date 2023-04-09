@@ -1,9 +1,15 @@
+if command -v python3 &>/dev/null; then
+    PYTHON=python3
+else
+    PYTHON=python
+fi
+
 download_and_source () {
     local filename=$1
     local url=$2
     if [ ! -f $filename ]; then
         # The default wget in Termux does not support https, so I use Python instead
-        python ~/download.py $url $filename
+        $PYTHON ~/download.py $url $filename
     fi
     source $filename
 }
