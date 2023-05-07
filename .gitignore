@@ -13,3 +13,23 @@ git-prompt.sh
 
 # I tend to put my Python virtual environments at ~/env27, ~/env_project_foo
 env*/
+
+# The usual stuffs in antiX desktop
+.desktop-session
+.dillo
+.fluxbox
+.foxrc
+.dbus/session-bus
+.gconf/apps
+.icewm
+.icons
+.jwm
+.local
+.mcthemes
+.mozilla/firefox
+.newsboat
+.screenlayout
+.xmms
+Desktop
+Live-usb-storage
+.thumbnails/normal
