@@ -1,10 +1,6 @@
-# Derived from official https://docs.docker.com/engine/install/debian/#install-using-the-repository
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io
+echo "Nowadays you can install docker-ce etc. from antiX 21+'s Synaptic Package Manager."
+echo "Install it first, and then continue with this script for post-install tuning."
+read -s -p "Press ENTER to continue..."
 
 echo "Required workaround for antiX Live USB's demo account"
 sudo echo '{"data-root":"/home/demo/Live-usb-storage/docker"}' > /etc/docker/daemon.json
