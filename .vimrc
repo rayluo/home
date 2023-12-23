@@ -77,7 +77,19 @@ noremap <leader><Right> :tabnext<CR>
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
 
-" Setup a shorthand for Python unitTest current file
+" Derived from step 4 of https://vimways.org/2019/vim-and-the-working-directory/
+nnoremap <leader>cd :lcd %:p:h
+
+"Status line inspired by https://shapeshed.com/vim-statuslines/
+set statusline=%{getcwd()}$
+set statusline+=\ %f
+set statusline+=%M
+set statusline+=%r
+set statusline+=%y
+set statusline+=\ C%c
+set statusline+=\ %p%%
+
+" Setup a shorthand for running python unittest on current file
 " Currently only support the test file inside one level below project root
 :command! PT :!python -m unittest -v %:h.%:t:r
 
