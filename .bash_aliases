@@ -35,3 +35,10 @@ PS1="$nc\u$nc@$CYAN\H$nc:\w$nc$YELLOW\$(__git_ps1 \" (%s)\")$nc\$ "
 # A workaround for the ROXTerm on my AntiX 19, otherwise lazygit loses highlight color
 alias tmux='TERM=xterm-256color tmux'
 
+export PATH=$PATH:~
+
+# Trying to improve touchpad palm detection.
+# Learnt from https://unix.stackexchange.com/questions/28306/looking-for-a-way-to-improve-synaptic-touchpad-palm-detectionly complely complely comly compleplely comple
+synclient PalmDetect=1
+synclient PalmMinWidth=4
+synclient PalmMinZ=50
