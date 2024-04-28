@@ -1,4 +1,4 @@
-"""Setup copilot in vim"""
+"""Setup copilot in vim. You can re-run this multiple time until success."""
 import os, pathlib, shutil, stat, subprocess, sys, tempfile, urllib.request
 
 
@@ -12,7 +12,11 @@ def setup_node(
     with open(filename, "wb") as f:
         f.write(urllib.request.urlopen(source).read())
     shutil.unpack_archive(filename, unzip_dir)
-    subprocess.run(f"ln -s {unzip_dir}/node-v21.5.0-linux-x64/bin/node {executable_path}", shell=True)
+    if subprocess.run(
+        f"ln -s {unzip_dir}/node-v21.5.0-linux-x64/bin/node {executable_path}",
+        shell=True,
+    ).returncode:
+        sys.exit("Setup copilot plugin for Vim ... ERR")
 
 
 def ensure_home_path():
@@ -28,9 +32,11 @@ def ensure_home_path():
 def setup_copilot_plugin():
     plugin_location = "~/.vim/pack/github/start/copilot.vim"
     if not os.path.exists(os.path.expanduser(plugin_location)):
-        subprocess.run(  # Derivef from https://github.com/github/copilot.vim
+        if subprocess.run(  # Derived from https://github.com/github/copilot.vim
             f"git clone https://github.com/github/copilot.vim.git {plugin_location}",
-            shell=True)
+            shell=True,
+        ).returncode:
+            sys.exit("Setup copilot plugin for Vim ... ERR")
         print("Setup copilot plugin for Vim ... OK")
     else:
         print("Copilot plugin already exists ... OK")
