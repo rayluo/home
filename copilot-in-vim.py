@@ -50,7 +50,7 @@ with tempfile.TemporaryDirectory() as tmpdirname:
     print("Setup node ... OK")
 setup_copilot_plugin()
 
-print("If you haven't already, go download a recent vim AppImage from here: "
+print("Copilot requires Vim 9+. If needed, download an AppImage from here: "
     "https://github.com/vim/vim-appimage/releases")
 print("Restart Vim, and then run `:Copilot setup` in your vim")
 
