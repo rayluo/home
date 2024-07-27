@@ -6,3 +6,13 @@ lg = !"git lg1"
 
 [diff "do-word-diff"]
 	command = ~/.word-diff.sh
+
+[credential]
+# Derived from https://github.com/hickford/git-credential-oauth?tab=readme-ov-file#manual-config
+	helper = cache --timeout 172800
+	helper = oauth
+# Now, you can still customize credential settings for individual repo if you want to.
+# https://stackoverflow.com/questions/13198143/how-do-i-disable-gits-credential-helper-for-a-single-repository
+# For example, you may use this in one of your special repo that needs a different setup.
+#       helper =
+#       helper = store
