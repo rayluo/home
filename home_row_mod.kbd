@@ -1,0 +1,68 @@
+;; The env var KBD_DEVICE shall contain something like
+;;      /dev/input/by-id/usb-MYKB_MK48_v2_vial:f64c2b3c-event-kbd
+;; It can be achieved by using the launcher script which sets it up interactively
+
+(defcfg
+  ;; For Linux
+  input  (device-file "$KBD_DEVICE")
+  output (uinput-sink "My KMonad output")
+
+  ;; For Windows
+  ;; input  (low-level-hook)
+  ;; output (send-event-sink)
+
+  ;; For MacOS
+  ;; input  (iokit-name "my-keyboard-product-string")
+  ;; output (kext)
+
+  ;; This option tells KMonad to let non-configured keys act normal
+  fallthrough true
+)
+
+;; Derived from https://precondition.github.io/home-row-mods#getting-started-with-home-row-mods-on-kmonad
+
+(defsrc
+    ;; This line is for fitting another key into my 48/54 keyboard
+    esc
+
+    ;; a    s    d    f    g    h    j    k    l    ;
+    z    x    c    v    b    n    m    ,    .    /
+
+    ;; This line is for my 48/54 keyboard's second layer
+    pgdn
+)
+
+(defalias
+    _esc (tap-hold-next-release 200 esc `)
+
+    ;; _a (tap-hold-next-release 200 a lsft)
+    ;; _s (tap-hold-next-release 200 s lctl)
+    ;; _d (tap-hold-next-release 200 d lalt)
+    ;; _f (tap-hold-next-release 200 f lmet)
+
+    ;; _j (tap-hold-next-release 200 j rmet)
+    ;; _k (tap-hold-next-release 200 k ralt)
+    ;; _l (tap-hold-next-release 200 l lctl)
+    ;; _; (tap-hold-next-r
+
+    _z (tap-hold-next-release 200 z lsft)
+    _x (tap-hold-next-release 200 x lctl)
+    _c (tap-hold-next-release 200 c lalt)
+    _v (tap-hold-next-release 200 v lmet)
+
+    _m (tap-hold-next-release 200 m rmet)
+    _, (tap-hold-next-release 200 , ralt)
+    _. (tap-hold-next-release 200 . lctl)
+    _/ (tap-hold-next-release 200 / rsft)
+
+    _pgdn (tap-hold-next-release 200 pgdn ralt)
+)
+
+(deflayer homerowmods
+    @_esc
+
+    ;; @_a   @_s   @_d   @_f   g   h   @_j   @_k   @_l   @_;
+    @_z   @_x   @_c   @_v   b   n   @_m   @_,   @_.   @_/
+
+    @_pgdn
+)
