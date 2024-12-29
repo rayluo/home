@@ -20,3 +20,5 @@ lg = !"git lg1"
 # For example, you may use this in one of your special repo that needs a different setup.
 #       helper =
 #       helper = store
+[fetch]
+	prune = true
