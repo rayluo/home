@@ -10,3 +10,16 @@ git:
     ## extra args passed to `git merge`, e.g. --no-ff
     #args: "--no-ff"
   branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+
+customCommands:
+  # Support this in the lazygit way: 'read -p "YYYY.mm.dd? " when; git commit --amend --no-edit --date ${when}T12:34:56'
+  - key: D
+    context: commits
+    description: "Change a commit to another date"
+    command: 'git commit --amend --no-edit --date {{.Form.when}}T12:34:56'
+    output: log
+    prompts:
+      - type: input
+        title: 'Change the commit date to (YYYY.mm.dd)?'
+        key: when
+
