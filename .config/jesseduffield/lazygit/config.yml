@@ -23,3 +23,8 @@ customCommands:
         title: 'Change the commit date to (YYYY.mm.dd)?'
         key: when
 
+  - key: B
+    context: files
+    description: "Blame the hovered file"
+    command: 'git blame {{.SelectedFile.Name | quote}}'
+    output: log
