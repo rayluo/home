@@ -8,6 +8,10 @@ lg = !"git lg1"
 	command = ~/.word-diff.sh
 
 [credential]
+# Need useHttpPath=true for scenario of same user needs different credentials for different repo
+# otherwise the credential cache will use one credential for the other repositories
+	useHttpPath = true
+
 # Derived from https://github.com/hickford/git-credential-oauth?tab=readme-ov-file#manual-config
 	helper = cache --timeout 172800
 	helper = oauth
