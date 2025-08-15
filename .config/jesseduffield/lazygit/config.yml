@@ -1,6 +1,6 @@
 git:
   paging:
-    externalDiffCommand: "~/.word-diff.sh"
+    externalDiffCommand: "git diff"
   merging:
     ## extra args passed to `git merge`, e.g. --no-ff
     #args: "--no-ff"
