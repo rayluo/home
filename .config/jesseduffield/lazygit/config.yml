@@ -1,6 +1,11 @@
 git:
   paging:
-    externalDiffCommand: "~/.word-diff.sh"
+
+    ## This line will use customized word-diff unconditionally
+    #externalDiffCommand: "~/.word-diff.sh"
+    ## Starting from lazygit 0.55.0, this setting honors git's external diff configurations
+    useExternalDiffGitConfig: true
+
   merging:
     ## extra args passed to `git merge`, e.g. --no-ff
     #args: "--no-ff"
